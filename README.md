@@ -22,7 +22,7 @@ Basicamente é uma aplicação que disponibiliza um sistema de gerenciamento de 
 - [x] Testes unitários com TestCase do framework Django
 
 ```
-Por ser tratar de uma aplicação que não possui muita complexidade na modelagem do negócio foi investido
+Por ser tratar de uma aplicação que não possui muita complexidade nas regras de negócio foi investido
 bastante tempo na criação dos testes, tentando extrair o máximo de possibilidade das opções disponiveis,
 ao total foram implementados 54 testes, incluindo testes de API.
 ```
