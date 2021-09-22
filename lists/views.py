@@ -49,7 +49,7 @@ def new_todolist(request):
     if request.method == "POST":
         form = TodoForm(request.POST)
         if form.is_valid():
-            # create default todolist
+            
             user = request.user if request.user.is_authenticated else None
             todolist = TodoList(creator=user)
             todolist.save()

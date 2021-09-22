@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  // Variables
+  
   var $nav = $('.navbar'),
     $body = $('body'),
     $window = $(window),

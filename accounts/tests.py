@@ -32,42 +32,42 @@ class AccountsTests(TestCase):
     def test_register(self):
         response = self.client.post(reverse("auth:register"), data=self.register_data)
         self.assertRedirects(response, "/auth/login/")
-        # new user was created
+       
         self.assertIsNotNone(User.objects.get(username="new_user"))
 
     def test_login(self):
-        # no user is logged in
+  
         self.assertFalse("_auth_user_id" in self.client.session)
         login_data = {"username": "test", "password": "test"}
         response = self.client.post(reverse("auth:login"), data=login_data)
         self.assertRedirects(response, "/")
-        # user is logged in
+      
         self.assertEqual(self.client.session["_auth_user_id"], "1")
 
-    # check if error messages are part of the response
+    
     def test_faulty_login(self):
-        # change username for invalid post
+     
         login_data = {"username": 65 * "X", "password": "test"}
         response = self.client.post(reverse("auth:login"), data=login_data)
         error_message = "Ensure this value has at most 64 characters"
         self.assertContains(response, error_message, status_code=200)
 
     def test_login_with_non_existent_user(self):
-        # change username for invalid post
+        
         login_data = {"username": "notauser", "password": "stillapassowrd"}
         response = self.client.post(reverse("auth:login"), data=login_data)
         error_message = "Incorrect username and/or password."
         self.assertContains(response, error_message, status_code=200)
 
     def test_login_with_wrong_password(self):
-        # change username for invalid post
+     
         login_data = {"username": "test", "password": "wrongpassword"}
         response = self.client.post(reverse("auth:login"), data=login_data)
         error_message = "Incorrect username and/or password."
         self.assertContains(response, error_message, status_code=200)
 
     def test_faulty_register(self):
-        # change username for invalid post
+      
         self.register_data["username"] = 65 * "X"
         response = self.client.post(reverse("auth:register"), data=self.register_data)
         error_message = "Ensure this value has at most 64 characters"
@@ -76,13 +76,13 @@ class AccountsTests(TestCase):
     def test_logout(self):
         response = self.client.get(reverse("auth:logout"))
         self.assertRedirects(response, "/")
-        # no user logged in anymore
+    
         self.assertFalse("_auth_user_id" in self.client.session)
 
 
 class LoginFormTests(TestCase):
 
-    # valid test case is covered by AccountsTests (because we need a user)
+   
     def setUp(self):
         self.too_long_password = {"username": "test", "password": 65 * "X"}
         self.too_long_username = {"username": 65 * "X", "password": "test"}
@@ -153,7 +153,7 @@ class RegistrationFormTests(TestCase):
             "password_confirmation": "test2",
         }
 
-    # some tests can be skipped because of the coverage of LoginFormTests
+  
     def test_valid_input(self):
         form = RegistrationForm(self.valid_form_data)
         self.assertTrue(form.is_valid())
