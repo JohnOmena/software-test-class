@@ -40,4 +40,10 @@ Primeiramente, precisamos instalar os requerimentos, e depois realizar a chamada
 ## Execução dos testes
 
     python3 manage.py test
+    
+```
+Caso encontre algum problema com a execução desse comando, tente usar o comando abaixo antes
+```
 
+    python3 manage.py collectstatic
+  
